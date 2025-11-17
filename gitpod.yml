@@ -1,0 +1,19 @@
+image: gitpod/workspace-full
+
+tasks:
+  - name: Install Odoo 19
+    init: |
+      sudo apt update
+      sudo apt install -y python3-pip python3-dev build-essential \
+          libsasl2-dev python3-setuptools nodejs npm \
+          libldap2-dev libssl-dev wkhtmltopdf git
+      pip install wheel
+      pip install -r requirements.txt
+  - name: Run Odoo 19
+    command: |
+      python3 odoo/odoo-bin -c odoo.conf
+
+ports:
+  - port: 8069
+    onOpen: open-preview
+    visibility: public
